@@ -1,0 +1,35 @@
+s=['fragola', 'limone', 'mela','arancio' ]
+
+i=len(s)
+j=0
+ricerca=input('Trova patola')
+media=int(i/2)
+posizione=0
+trovata=True
+while j < i:
+
+if j >= media:
+if s[j]==ricerca:
+#print("\nParola trovata", s[j])
+# print(f'Parola che stata trovata e in posizione {j} ')
+trovata = True
+posizione = j
+if j <= media:
+if s[j]==ricerca:
+#print("\nParola trovata", s[j])
+#print(f'Parola che stata trovata e in posizione {j} ')
+trovata = True
+posizione = j
+
+#else:
+#print(f'In queste posizioni non ci sono parole {j} ')
+
+
+j=j+1
+
+
+if trovata==True:
+print(s[posizione])
+
+
+
