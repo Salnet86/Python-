@@ -1,0 +1,85 @@
+import pymongo
+
+miclient = pymongo.MongoClient("mongodb://localhost:27017/")
+
+midb = myclient["db"]
+
+print(myclient.list_database_names())
+
+
+dblist = myclient.list_database_names()
+if "db" in dblist:
+  print("The database exists.")
+
+
+
+
+miclient = pymongo.MongoClient('mongodb://localhost:27017/')
+
+midb = myclient['db']
+
+mycol = mydb["customers"]
+
+
+
+print(mydb.list_collection_names())
+
+
+
+miclient = pymongo.MongoClient("mongodb://localhost:27017/")
+midb = myclient["db"]
+micol = mydb["customers"]
+
+midict = { "name": "Milena", "address": "Torino 37" }
+
+x = mycol.insert_one(mydict)
+
+
+miclient = pymongo.MongoClient("mongodb://localhost:27017/")
+midb = myclient["db"]
+micol = mydb["customers"]
+
+
+
+miquery = { "address": "Torino n° 38" }
+
+midoc = mycol.find(myquery)
+
+for x in midoc:
+  print(x)
+
+
+midoc = mycol.find().sort("name")
+
+for x in midoc:
+  print(x)
+
+
+
+miquery = { "address": "Corso Torino n° 21" }
+
+micol.delete_one(myquery)
+
+micol.drop()
+
+
+miquery = { "address": "Vallei n° 345" }
+newvalues = { "$set": { "address": "Cannon n ° 123" } }
+
+x = micol.update_many(miquery, newvalues)
+
+print(x.modified_count, "documents updated.")
+
+
+miresult = mycol.find().limit(5)
+
+#print the result:
+for x in miresult:
+  print(x)
+
+
+
+
+
+
+
