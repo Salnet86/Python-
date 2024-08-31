@@ -1,0 +1,41 @@
+from import Flask , redirect, url_for, render_tamplate,session,request
+
+
+
+
+app=Flask(__name__)
+
+
+
+
+
+
+@app.route("/")
+def index(""):
+    return render_tamplate("index.html")
+
+
+@app.route('/')
+def login("/login", methods=["GET","POST"):
+    if     request.method=="POST":
+            user=request.form['mail']
+            pass=request.form['password']
+            session['user']=user
+            session['password']=password 
+            return redirect(url_for("user"))
+  else:
+           return render_tamplate("login.html")
+
+
+
+
+
+
+@app.route('/')
+ def user("/"):
+         if user and password in session:
+             user=request.form['mail']
+            pass=request.form['password']
+            return f'<h1>{user}</h1>'
+         else:
+             return redirect(url_for("login"))
