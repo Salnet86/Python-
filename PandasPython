@@ -1,0 +1,80 @@
+python dataframe pandas
+. code:: ipython3
+
+    import pandas as pd
+    
+    df = pd.DataFrame([[1,2], [3,5,]], columns=["a", "b"])
+
+.. code:: ipython3
+
+    df
+
+
+
+
+.. raw:: html
+
+    <div>
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
+    
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+    
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>a</th>
+          <th>b</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>3</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+.. code:: ipython3
+
+    for collone in df:
+        print(df[collone])
+
+
+.. parsed-literal::
+
+    0    1
+    1    3
+    Name: a, dtype: int64
+    0    2
+    1    5
+    Name: b, dtype: int64
+    
+
+.. code:: ipython3
+
+    print(df[collone].values)
+
+
+.. parsed-literal::
+
+    [2 5]
+    
