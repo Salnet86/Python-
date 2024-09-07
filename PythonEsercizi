@@ -1,0 +1,13 @@
+
+formazione variabile python 
+Input_Float=float(input('Inserci un valore numerico float'))
+print("{:5.3f}".format(Input_Float))
+
+Request python
+
+import requests
+ip_default="IP"
+print("Server IP",ip_default)
+r = requests.get('http://'+ip_default+'/cgi-bin/python/DHT11/software.py')
+print(r.text)
+
