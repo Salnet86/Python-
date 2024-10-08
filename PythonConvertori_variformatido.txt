@@ -1,0 +1,117 @@
+import json
+
+# Leggere il file JSON
+with open('file.json', 'r') as file:
+data = json.load(file)
+
+# Ora 'data' è un dizionario Python, e puoi convertirlo in altri formati, ad esempio in CSV
+
+
+
+Esempio 
+
+
+Per convertire diversi formati come HTML, CSV, XML e PDF in JSON usando Python, dobbiamo gestire ciascun formato separatamente.
+
+
+
+
+1) Convertire HTML in JSON
+Per estrarre i dati da un file HTML e convertirli in JSON, puoi usare BeautifulSoup per analizzare il file HTML:
+
+
+
+
+from bs4 import BeautifulSoup
+import json
+
+
+# Leggere il file HTML
+with open('file.html', 'r') as file:
+    soup = BeautifulSoup(file, 'html.parser')
+
+
+# Estrarre dati dall'HTML (puoi personalizzare in base alla struttura HTML)
+data = {'title': soup.title.string, 'text': soup.get_text()}
+
+
+# Salvare i dati come JSON
+with open('file.json', 'w') as json_file:
+    json.dump(data, json_file, indent=4)
+
+
+2)Convertire CSV in JSON
+Per convertire un file CSV in JSON, puoi usare il modulo csv
+
+
+import csv
+import json
+
+# Leggere il file CSV
+csv_file = 'file.csv'
+json_file = 'file.json'
+
+data = []
+with open(csv_file, mode='r') as file:
+csv_reader = csv.DictReader(file)
+for row in csv_reader:
+data.append(row)
+
+# Scrivere i dati come JSON
+with open(json_file, 'w') as file:
+json.dump(data, file, indent=4)
+
+
+
+3)Convertire XML in JSON
+Per convertire XML in JSON, puoi usare xmltodict
+
+
+
+
+import xmltodict
+import json
+
+# Leggere il file XML
+with open('file.xml', 'r') as file:
+xml_data = file.read()
+
+# Convertire XML in dict
+data_dict = xmltodict.parse(xml_data)
+
+# Scrivere i dati come JSON
+with open('file.json', 'w') as json_file:
+json.dump(data_dict, json_file, indent=4)
+
+
+
+
+
+4)Convertire PDF in JSON
+Per estrarre testo da un PDF e convertirlo in JSON, puoi usare PyPDF2
+
+
+
+
+import PyPDF2
+import json
+
+# Leggere il file PDF
+pdf_file = 'file.pdf'
+json_file = 'file.json'
+
+data = {}
+with open(pdf_file, 'rb') as file:
+reader = PyPDF2.PdfReader(file)
+num_pages = len(reader.pages)
+
+# Estrarre il testo da ciascuna pagina
+text = ""
+for page_num in range(num_pages):
+text += reader.pages[page_num].extract_text()
+
+data['content'] = text
+
+# Scrivere i dati come JSON
+with open(json_file, 'w') as file:
+json.dump(data, file, indent=4)
