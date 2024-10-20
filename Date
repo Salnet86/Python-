@@ -1,0 +1,12 @@
+from datetime import datetime
+
+# Stringa di data
+data = '1986/05/02'
+
+# Convertire la stringa in un oggetto datetime
+x = datetime.strptime(data, '%Y/%m/%d')  # Specifica il formato della data
+
+# Formattare la data come desiderato
+data_formattata = x.strftime('%d-%m-%Y')  # Cambia formato a Giorno-Mese-Anno
+
+print(data_formattata)  # Output: '02-05-1986'
