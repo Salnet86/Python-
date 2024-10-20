@@ -10,3 +10,18 @@ x = datetime.strptime(data, '%Y/%m/%d')  # Specifica il formato della data
 data_formattata = x.strftime('%d-%m-%Y')  # Cambia formato a Giorno-Mese-Anno
 
 print(data_formattata)  # Output: '02-05-1986'
+
+------------/////
+
+from datetime import datetime
+
+
+data_attuale = datetime.now()  # Ottiene la data e l'ora correnti
+
+data_specifica = datetime(2023, 10, 20)  # 20 ottobre 2023
+
+
+data_formattata = data_attuale.strftime("%d-%m-%Y")  # Formato: giorno-mese-anno
+print(data_formattata)  # Esempio Output: '20-10-2023'
+
+
