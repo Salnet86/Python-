@@ -251,13 +251,16 @@ if x[0] == 5:
 
 ---------------Giusto-------------
 
-x = [1, 5, 6, 5]
-if x[0] == 5:
-    x[1] = 5  # Ora funziona, perché le liste sono mutabili
+x = (1, 6, 7, 6)
 
-------—------------
+if x[0] == 1:  # Controlla se il primo elemento è 1
+    print("Il primo elemento è 1.")
+else:
+    print("Il primo elemento non è 1.")
 
-
+Spiegazione
+Controllo con if: Non ci sarà errore se x[0] è accessibile, e puoi confrontarlo con il valore desiderato.
+Immutabilità: Ricorda che non puoi modificare x[0] direttamente, ma puoi controllare il suo valore senza problemi.
 
 
 
