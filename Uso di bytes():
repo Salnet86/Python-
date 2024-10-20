@@ -1,0 +1,49 @@
+Uso di bytes():
+
+b = bytes(5)  # Crea un oggetto bytes di 5 byte, tutti a zero
+print(b)  # Output: b'\x00\x00\x00\x00\x00'
+
+
+Dalla stringa
+
+b = b'hello'  # Stringa di byte, notazione con prefisso b
+print(b)  # Output: b'hello'
+
+
+Uso di bytearray (mutabile)
+
+
+ba = bytearray(b'hello')
+ba[0] = ord('H')  # Modifica un byte
+print(ba)  # Output: bytearray(b'Hello')
+
+
+Accesso agli Elementi
+Puoi accedere ai singoli byte tramite l'indice:
+
+b = b'hello'
+print(b[0])  # Output: 104 (codice ASCII di 'h')
+
+
+Conversione tra Byte e Stringhe
+Puoi convertire tra bytes e stringhe usando encode() e decode():
+
+
+# Da stringa a byte
+s = 'hello'
+b = s.encode('utf-8')
+print(b)  # Output: b'hello'
+
+# Da byte a stringa
+s2 = b.decode('utf-8')
+print(s2)  # Output: 'hello'
+
+Operazioni sui Byte
+Le operazioni comuni includono concatenazione e slicing:
+
+b1 = b'hello'
+b2 = b' world'
+b3 = b1 + b2  # Concatenazione
+print(b3)  # Output: b'hello world'
+
+
