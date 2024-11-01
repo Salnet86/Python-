@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU</title>
+    <style>
+        body {
+            background-color: green;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: lampeggio 1s infinite;
+        }
+
+        @keyframes lampeggio {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #button {
+            background-color: blue;
+            color: white;
+            text-align: center;
+            width: 200px;
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #button:hover {
+            background-color: darkblue;
+        }
+
+        #refresh-link {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        #refresh-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>CPU</h1>
+    <img src="{{ url_for('temperatura') }}" alt="Temperatura CPU">
+    <div id="button">Temperatura</div>
+    <a id="refresh-link" href="JavaScript: location.reload(true);">Click Refresh</a>
+
+    <script>
+        var button = document.getElementById("button");
+        button.addEventListener('click', function() {
+            location.href = "https://salvnet86.pythonanywhere.com//tem";
+        });
+    </script>
+</body>
+</html>

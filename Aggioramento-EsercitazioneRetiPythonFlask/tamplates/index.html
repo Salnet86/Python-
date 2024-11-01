@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiche di Sistema</title>
+    <style>
+        body {
+            background-color: #4caf50; /* Verde brillante */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            color: #ffffff; /* Testo bianco per contrasto */
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .header {
+            background-color: #00796b;
+            color: #ffffff;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu {
+            width: 100%;
+            max-width: 400px; /* Larghezza massima per il menu */
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s;
+        }
+
+        .menu li:hover {
+            background-color: #b2dfdb; /* Colore chiaro al passaggio del mouse */
+        }
+
+        .menu li:last-child {
+            border-bottom: none; /* Rimuove il bordo per l'ultimo elemento */
+        }
+
+        .menu a {
+            color: #00796b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #00796b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #004d40; /* Colore scuro al passaggio del mouse */
+        }
+
+        .qrcode {
+            margin: 20px;
+            display: flex;
+            flex-direction: column; /* Disposizione verticale */
+            align-items: center; /* Centra i QR code */
+        }
+
+        canvas {
+            margin: 20px 0; /* Aumento del margine tra i QR code */
+        }
+
+        .pdf-button {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .pdf-button:hover {
+            background-color: #004d40; /* Colore scuro al passaggio del mouse */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <marquee behavior="scroll" direction="left" style="background-color: #00796b; color: white;">CPU</marquee>
+
+    <div class="header">
+        <h1 class="title">CPU</h1>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li>Uso CPU: {{ cpu }}%</li>
+            <li>Uso Disco: {{ disk }}%</li>
+            <li>Uso Memoria: {{ memoria }}%</li>
+            <li><a href='https://salvonetwork.pythonanywhere.com/index'>Inserisci temperature e umidità</a></li>
+            <li><a href='https://salvonetwork.pythonanywhere.com/TP_record'>Registro Temperature e umidità</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1><a class="cta-button" href="https://salvnet86.pythonanywhere.com/cpu">CLICCA QUI</a></h1>
+        <h2>Monitoraggio reti informatiche</h2>
+    </div>
+
+    <div class="qrcode">
+        <h3>QR Code per Inserire Temperature e Umidità</h3>
+        <canvas id="qrcode1"></canvas>
+        <h3>QR Code per Registro Temperature e Umidità</h3>
+        <canvas id="qrcode2"></canvas>
+        <h3>QR Code CPU</h3>
+        <canvas id="qrcode3"></canvas>
+    </div>
+
+    <button class="pdf-button" onclick="downloadPDF()">Scarica PDF</button>
+
+    <script>
+        var qrious1 = new QRious({
+            element: document.getElementById('qrcode1'),
+            value: 'https://salvonetwork.pythonanywhere.com/index',
+            size: 200,
+            foreground: '#00ff00', // Lime (Colore dei moduli)
+            background: '#ffffff'   // Colore di sfondo
+        });
+
+        var qrious2 = new QRious({
+            element: document.getElementById('qrcode2'),
+            value: 'https://salvonetwork.pythonanywhere.com/TP_record',
+            size: 200,
+            foreground: '#00ff00', // Lime (Colore dei moduli)
+            background: '#ffffff'   // Colore di sfondo
+        });
+
+        var qrious3 = new QRious({
+            element: document.getElementById('qrcode3'),
+            value: 'https://salvnet86.pythonanywhere.com/tem',
+            size: 200,
+            foreground: '#00ff00', // Lime (Colore dei moduli)
+            background: '#ffffff'   // Colore di sfondo
+        });
+
+       function downloadPDF() {
+         const { jsPDF } = window.jspdf;
+         const pdf = new jsPDF(); // Inizializzazione dell'istanza
+            pdf.setFontSize(16); // Imposta la dimensione del font
+            pdf.text('Statistiche di Sistema', 10, 10);
+            pdf.text(`Uso CPU: {{ cpu }}%`, 10, 20);
+            pdf.text(`Uso Disco: {{ disk }}%`, 10, 30);
+            pdf.text(`Uso Memoria: {{ memoria }}%`, 10, 40);
+
+            // Aggiungi gli autori in maiuscolo con colore lime
+            pdf.setTextColor(0, 255, 0); // Lime
+            pdf.setFontSize(14); // Imposta la dimensione del font
+            pdf.text('Autori del software', 10, 60);
+            pdf.text('AUTORE 1 BREZZA SALVATORE', 10, 70);
+            pdf.text('AUTORE 2  MARIA ' , 10, 80);
+
+    // Torna al colore di default
+    pdf.setTextColor(0, 0, 0); // Nero
+    pdf.setFontSize(12); // Dimensione del font per la descrizione
+    pdf.text('manuale software', 10, 90); // Sottolineato
+    pdf.line(10, 93, 50, 93); // Sottolineatura
+
+    // Descrizione del manuale
+    pdf.setFontSize(10); // Dimensione del font più piccola
+    pdf.text('Flask: Per creare l\'applicazione web.', 10, 100);
+    pdf.text('Response, render_template, jsonify: Funzioni per gestire le risposte e i template.', 10, 105);
+    pdf.text('io: Per gestire i flussi di dati in memoria.', 10, 110);
+    pdf.text('psutil: Per ottenere informazioni sul sistema (uso della CPU, disco e memoria).', 10, 115);
+    pdf.text('matplotlib e seaborn: Per creare grafici.', 10, 120);
+    pdf.text('Creazione dell\'applicazione:', 10, 125);
+    pdf.text('Viene creata un\'istanza di Flask chiamata app.', 10, 130);
+    pdf.text('Rotta /index:', 10, 135);
+    pdf.text('Raccoglie l\'uso della CPU, del disco e della memoria.', 10, 140);
+    pdf.text('Se c\'è un errore durante la raccolta dei dati, restituisce un errore 500 in formato JSON.', 10, 145);
+    pdf.text('Se i dati vengono raccolti correttamente, il template index.html viene renderizzato con i dati delle statistiche.', 10, 150);
+    pdf.text('Rotta /cpu_temperatura:', 10, 155);
+    pdf.text('Rende il template temperatura.html, che mostra un\'intestazione per la temperatura della CPU.', 10, 160);
+    pdf.text('Rotta /tem:', 10, 165);
+    pdf.text('Raccoglie i dati di utilizzo della CPU e la temperatura per un periodo di tempo.', 10, 170);
+    pdf.text('Crea un grafico utilizzando matplotlib e seaborn per visualizzare l\'uso della CPU e la temperatura nel tempo.', 10, 175);
+    pdf.text('Il grafico viene salvato in un oggetto BytesIO e restituito come immagine PNG.', 10, 180);
+    pdf.text('Esecuzione dell\'app:', 10, 185);
+
+
+    //------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Aggiungi il contenuto
+    // Salva il PDF
+    pdf.save('statistiche_di_sistema.pdf');
+}
+
+    </script>
+</body>
+</html>

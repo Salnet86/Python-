@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Temperatura e Umidità</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        form {
+            max-width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/temp">
+        <label for="temperatura">Temperatura:</label>
+        <input type="number" name="temperatura" placeholder="Inserisci la temperatura" required>
+        <label for="umidita">Umidità:</label>
+        <input type="number" name="umidita" placeholder="Inserisci l'umidità" required>
+        <input type="submit" value="Invia">
+        <p><a href="http://SalvoNetwork.pythonanywhere.com/TP_record">Record</a></p>
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const temp = document.querySelector('input[name="temperatura"]').value;
+            const humidity = document.querySelector('input[name="umidita"]').value;
+            alert(`Temperatura: ${temp}, Umidità: ${humidity}`);
+            // Invia il modulo dopo l'alert
+            event.target.submit();
+        });
+    </script>
+</body>
+</html>
+
