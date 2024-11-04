@@ -1,0 +1,59 @@
+import socket
+import threading
+
+class ChatRoom:
+def __init__(self, host='127.0.0.1', port=12345):
+self.host = host
+self.port = port
+self.clients = [] # Lista per tenere traccia dei client connessi
+self.server_socket = None
+
+def socket(self):
+"""Crea un socket per la chat room."""
+self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+self.server_socket.bind((self.host, self.port))
+self.server_socket.listen(5) # Ascolta fino a 5 connessioni in attesa
+print(f"Server in ascolto su {self.host}:{self.port}")
+
+def connessione(self):
+"""Accetta una nuova connessione e aggiunge il client alla lista."""
+while True:
+client_socket, addr = self.server_socket.accept()
+print(f"Connessione da {addr}")
+self.clients.append(client_socket)
+threading.Thread(target=self.ricevi, args=(client_socket,)).start()
+
+def ricevi(self, client_socket):
+"""Riceve messaggi da un client e li inoltra agli altri client."""
+while True:
+try:
+messaggio = client_socket.recv(1024).decode('utf-8')
+if messaggio:
+print(f"Messaggio ricevuto: {messaggio}")
+self.spedisci(messaggio, client_socket)
+else:
+break
+except Exception as e:
+print(f"Errore nella ricezione: {e}")
+break
+self.clients.remove(client_socket)
+client_socket.close()
+
+def spedisci(self, messaggio, mittente):
+"""Invia un messaggio a tutti i client, escluso il mittente."""
+for client in self.clients:
+if client != mittente:
+try:
+client.send(messaggio.encode('utf-8'))
+except Exception as e:
+print(f"Errore nell'invio a un client: {e}")
+
+def avvia(self):
+"""Avvia la chat room."""
+self.socket() # Crea il socket
+self.connessione() # Inizia ad accettare connessioni
+
+# Esempio di utilizzo
+if __name__ == "__main__":
+chat_room = ChatRoom()
+chat_room.avvia()

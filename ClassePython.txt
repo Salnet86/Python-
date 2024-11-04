@@ -1,0 +1,35 @@
+#--------Ereditarieta
+
+
+class Animale:
+def __init__(self, nome):
+self.nome = nome
+
+class Cane(Animale):
+def suona_verso(self):
+return f"{self.nome} fa: Bau"
+
+# Creiamo un'istanza della classe Cane
+cane = Cane("Fido")
+
+# Utilizziamo il metodo suona_verso
+print(cane.suona_verso()) # Stampa "Fido fa: Bau"
+
+
+
+
+
+------------Super classe - - - - - - - - - - - - 
+class Animale:
+def __init__(self, nome):
+self.nome = nome
+
+class Cane(Animale):
+def suona_verso(self):
+return f"{super().nome} fa: Bau"
+
+# Creiamo un'istanza della classe Cane
+cane = Cane("Fido")
+
+# Utilizziamo il metodo suona_verso
+print(cane.suona_verso()) # Stampa "Fido fa: Bau"
