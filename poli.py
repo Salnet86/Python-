@@ -10,7 +10,7 @@
 
 
 '''
-str="bellafiga"
+str="scrivi parola"
 flag=False
 
 p=int(len(str)/2)
@@ -32,7 +32,7 @@ print(str)
 
 
 
-#questa funzione l'ho fatta io senza copiate codice
+
 
 str=input('Inserisci una frase polidrome      :')
 p=len(str)
