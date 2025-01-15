@@ -1,0 +1,7 @@
+x = {}
+x["a"] = 10 # Aggiunge la chiave 'a' con il valore 10
+x["b"] = 20 # Aggiunge la chiave 'b' con il valore 20
+
+#print(x['a'])
+if "a" in x:
+print("La chiave 'a' esiste nel dizionario.")

@@ -1,0 +1,16 @@
+x = 12
+i = 0
+esp = 0
+m = 1 # Inizializza m
+
+# Fattorizzazione del numero in fattori di 2
+while x > 1:
+if x % 2 == 0:
+i += 1 # Incrementa l'esponente di 2
+m *= 2 # Moltiplica m per 2
+x //= 2 # Divisione intera per ridurre x
+
+# Risultati finali
+esp = i # Assegna l'esponente a esp
+print(f"Il numero 12 ha {esp} esponenti di 2")
+print(f"Il valore di m è {m}")
