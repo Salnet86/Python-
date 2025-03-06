@@ -1,0 +1,68 @@
+
+
+
+
+
+
+
+
+django-admin startproject misite //creo il il mio progetto globbare
+python3 manage.py startapp rolls //creo il il mio progetto all'intrno di misite creo un app
+python3 manage.py runserver // l'ancio il manege.py run djando server
+
+///sulla cartemma misite bisogna configurare urls.ps
+
+//configurazione  globbare
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('rolls/', include('rolls.urls', namespace='rolls')),
+]
+
+
+//crea nella cartella di rolls un file chiamato tests.py 
+configuro ulrs separato
+
+from django.urls import path
+from . import views  # Ensure you import views
+
+app_name = 'rolls'
+
+urlpatterns = [
+    path('', views.rolls, name='index'),
+    path('temperature/', views.temperature_Mas_Min, name='temperature_Mas_Min'),
+    path('vento/', views.vento, name='vento'),
+]
+----------------oppure---------------------------------
+#configurazione delle urlpatterns 
+from django.urls import path
+from . import views 
+
+app_name = 'rolls'
+
+urlpatterns = [
+    path('index/', views.index, name='index'),  
+    path('MT/', views.meteo, name='meteo'),     
+    path('temperature_min_max/', views.temperature_min_max, name='temperature_min_max'),
+    path('temperatura_media/', views.temperatura_media, name='temperatura_media'),
+    path('temperatura_max_umidita/', views.temperatura_max_umidita, name='temperatura_max_umidita'),
+    
+]
+
+----------------------------------
+
+chmod 644 stazione.csv
+
+
+-------------------------------------
+
+   Broweser 
+  
+http://127.0.0.1:8000/rolls/
+
+
+#python3 manage.py createsuperuser
+#python3 manage.py makemigrations 
+#python3 manage.py migrate
+#python3 manage.py createsuperuser
+#python3 manage.py runserver 
+

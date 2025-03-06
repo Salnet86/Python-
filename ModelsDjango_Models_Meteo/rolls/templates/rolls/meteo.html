@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizzazione</title>
+    <style>
+        body { text-align: center; background-color: lime;}
+        h1 { color: lime; }
+        marquee { display: block; }
+    </style>
+</head>
+<body>
+    <marquee>Ben venuto sito stazione meteo</marquee>
+ 
+    <h1 style="text-align: center;color: black;">Dati meteo</h1>
+    
+    <h2>Temperatura massima e minima</h2>
+    <img src="{% url 'rolls:temperature_min_max' %}">
+    
+   
+    
+    <h2 >Temperatura media</h2>
+    <img src="{% url 'rolls:temperatura_media' %}">
+    
+
+    <h2>Temperatura umidita</h2>
+    <img src="{% url 'rolls:temperatura_max_umidita' %}">
+
+
+</body>
+</html>
