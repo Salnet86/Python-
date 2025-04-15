@@ -100,12 +100,12 @@ stringa = "Ciao\tMondo"
 print("\nStringa con tabulazioni espanse:", stringa.expandtabs(4))
 
 # 25. Metodo .format() - Permette di inserire variabili all'interno di una stringa usando i segnaposti
-nome = "Mario"
+nome = "Maria"
 saluto = "Ciao, {}!".format(nome)
 print("\nStringa formattata:", saluto)
 
 # 26. Metodo f-string (dal Python 3.6) - Un'altra modalità di formattazione delle stringhe
-nome = "Mario"
+nome = "Maria"
 saluto = f"Ciao, {nome}!"
 print("\nStringa formattata con f-string:", saluto)
 
