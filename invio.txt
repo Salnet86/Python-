@@ -1,0 +1,33 @@
+import socket
+import os
+
+# 1. Percorso della cartella da inviare
+cartella = "C:/Users/TuoUtente/Downloads"  # cambia con la tua cartella
+files = os.listdir(cartella)  # lista di tutti i file
+
+# 2. Connetto al server
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("127.0.0.1", 5000))
+
+# 3. Invio file uno per uno
+for file_name in files:
+    percorso_file = os.path.join(cartella, file_name)
+    
+    if os.path.isfile(percorso_file):  # controllo che sia un file
+        # Invio nome file prima
+        client.send(file_name.encode())
+        client.recv(1024)  # attendo conferma dal server
+        
+        # Invio contenuto del file
+        f = open(percorso_file, "rb")
+        while True:
+            data = f.read(1024)
+            if not data:
+                break
+            client.send(data)
+        f.close()
+        client.send(b"EOF")  # messaggio fine file
+        client.recv(1024)     # conferma ricezione
+
+print("Tutti i file inviati!")
+client.close()
