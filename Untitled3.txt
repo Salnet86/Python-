@@ -1,0 +1,19 @@
+
+v=[1,2,3,4,5,6]
+i=0
+def fattoriale(n):
+    if n == 0:
+        
+        return 1
+    else:
+        #conta al contrario 
+        #print(v[n-1])
+        #conta a avanti
+        print(v[len(v)-n])
+        return n * fattoriale(n-1)
+        
+n=len(v)
+
+f=fattoriale(n)
+
+
